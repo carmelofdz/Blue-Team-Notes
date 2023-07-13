@@ -46,7 +46,7 @@ Donate as much or little money as you like, of course. I have some UK charities 
   * [Processes and Networks](#processes-and-networks)
   * [Files](#files)
   * [Bash Tips](#bash-tips)
-- [MacOS](#MacOS)
+- [macOS](#macOS)
   * [Reading .plist files](#Reading-.plist-files)
   * [Quarantine Events](#Quarantine-Events)
   * [Install History](Install-History)
@@ -3089,7 +3089,7 @@ history
 
 ---
 
-# MacOS
+# macOS
 
 
 <details>
@@ -3221,6 +3221,32 @@ Show user logins and outs auditreduce -c lo /var/audit/* | praudit
 ![image](https://user-images.githubusercontent.com/44196051/170065772-cea5403b-f402-4d5a-bd04-99d4b6feb80a.png)
 
 What happened between two dates: auditreduce /var/audit/* -a 20220401 -b 20220501 | praudit 
+
+## Safari Notification
+Notification from website can persist directly through the Safari web browser. These are saved to a plist and can be read/alerted from the plist itself.
+```
+plutil -p /Users/*/Library/Safari/UserNotificationPermissions.plist
+```
+
+The output will resemble with the `Permission` being a boolean value: `0 = denied` and `1 = allowed`.
+```
+{
+  "https://twitter.com" => {
+    "Date Added" => 2022-10-25 19:18:22 +0000
+    "Permission" => 1
+  }
+  "https://drive.google.com" => {
+    "Date Added" => 2022-11-03 18:58:35 +0000
+    "Permission" => 1
+  }
+  "https://infosec.exchange" => {
+    "Date Added" => 2023-02-15 19:32:33 +0000
+    "Permission" => 1
+  }
+}
+```
+
+![image](https://github.com/Purp1eW0lf/Blue-Team-Notes/assets/72467868/4c868a43-41e9-4066-9944-c9930445f61d)
 
 ## Command line history
 
@@ -3409,7 +3435,7 @@ Example of Capa output for the keylogger
 
 #### File
 
-The command `file` is likely to be installed in most unix, MacOS, and linux OS'. Deploy it next to the file you want to interrograte
+The command `file` is likely to be installed in most unix, macOS, and linux OS'. Deploy it next to the file you want to interrograte
 
 ![image](https://user-images.githubusercontent.com/44196051/203073884-6cb75b6b-2e56-4022-b84e-e881d1556214.png)
 
@@ -4231,7 +4257,7 @@ And if we look on a linux machine, we can confirm it's a PCAP alright
 
 ### Capture on 'Nix
 
-Big old assertion coming up: generally speaking, if a system is unix-based (so BSD, Linux, and MacOS) then they will likely have `tcpdump` installed and therefore are all good to capture PACKETS.
+Big old assertion coming up: generally speaking, if a system is unix-based (so BSD, Linux, and macOS) then they will likely have `tcpdump` installed and therefore are all good to capture PACKETS.
 
 You'll need to run `sudo` in front of tcpdump, or run it as root. 
 
@@ -6160,23 +6186,6 @@ C:\Program Files\Microsoft\Exchange Server\*\TransportRoles\Logs\*\*.log
 
 Things that MSPs, SysAdmins, and bad guys love to use
 
-ScreenConnect:
-
-```
-C:\Program Files*\ScreenConnect\App_Data\Session.db
-
-C:\Program Files*\ScreenConnect\App_Data\User.xml
-
-C:\ProgramData\ScreenConnect Client*\user.config
-```
-
-Splashtop
-```
-C:\windows\System32\winevt\Logs\Splashtop-Splashtop Streamer-Remote Session%4Operational.evtx
-
-C:\windows\System32\winevt\Logs\Splashtop-Splashtop Streamer-Status%4Operational.evtx
-```
-
 AnyDesk
 
 ```
@@ -6191,6 +6200,16 @@ C:\Users\*\AppData\Roaming\AnyDesk\connection_trace.txt
 C:\ProgramData\AnyDesk\connection_trace.txt
 
 C:\Windows\SysWOW64\config\systemprofile\AppData\Roaming\AnyDesk\*
+```
+
+Atera (linked to Splashtop)
+
+```
+C:\windows\temp\AteraSetupLog.txt
+
+C:\\Program Files\\ATERA Networks\\AteraAgent\log.txt
+
+HKLM\SOFTWARE\ATERA Networks\AlphaAgent value IntegratorLogin
 ```
 
 Kaseya
@@ -6209,6 +6228,15 @@ C:\Windows\Temp\KASetup.log
 C:\ProgramData\Kaseya\Log\KaseyaEdgeServices\
 ```
 
+mRemoteNG
+```
+C:\Users\*\AppData\Roaming\mRemoteNG\mRemoteNG.log
+
+C:\Users\*\AppData\Roaming\mRemoteNG\confCons.xml
+
+C:\Users\*\AppData\*\mRemoteNG\**10\user.config
+```
+
 RAdmin
 
 ```
@@ -6221,6 +6249,30 @@ C:\Windows\System32\rserver30\CHATLOGS\*\*.htm
 C:\Users\*\Documents\ChatLogs\*\*.htm
 ```
  
+RealVNC
+
+`C:\Users\*\AppData\Local\RealVNC\vncserver.log`
+
+ScreenConnect:
+
+```
+C:\Program Files*\ScreenConnect\App_Data\Session.db
+
+C:\Program Files*\ScreenConnect\App_Data\User.xml
+
+C:\ProgramData\ScreenConnect Client*\user.config
+```
+
+Splashtop (Linked to Atera)
+```
+C:\windows\System32\winevt\Logs\Splashtop-Splashtop Streamer-Remote Session%4Operational.evtx
+
+C:\windows\System32\winevt\Logs\Splashtop-Splashtop Streamer-Status%4Operational.evtx
+
+C:\ProgramData\Splashtop\Temp\log
+
+C:\Program Files (x86)\Splashtop\Splashtop Remote\Server\log
+```
 
 TeamViewer
 
@@ -6229,20 +6281,9 @@ C:\Program Files*\TeamViewer\connections*.txt
 
 C:\Program Files*\TeamViewer\TeamViewer*_Logfile*
 
-C:\Users\*\AppData\Roaming\TeamViewer\MRU\RemoteSupport\*
-```
+C:\Users\*\AppData\Roaming\TeamViewer\connections.txt
 
-RealVNC
-
-`C:\Users\*\AppData\Local\RealVNC\vncserver.log`
-
-mRemoteNG
-```
-C:\Users\*\AppData\Roaming\mRemoteNG\mRemoteNG.log
-
-C:\Users\*\AppData\Roaming\mRemoteNG\confCons.xml
-
-C:\Users\*\AppData\*\mRemoteNG\**10\user.config
+C:\Users\*\AppData\Roaming\TeamViewer\MRU\RemoteSupport\*tvc
 ```
 
 ## Cerutil History
